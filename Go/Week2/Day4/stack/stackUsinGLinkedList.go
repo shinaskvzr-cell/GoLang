@@ -1,24 +1,23 @@
 package main
 import "fmt"
 
-type Node struct {
+type Node struct{
 	data int
 	next *Node
 }
-
-type Stack struct{
+ type Stack struct {
 	top *Node
-}
-
-func (s *Stack) Push (x int){
-	newNode := &Node {data:x}
+ }
+ 
+func (s *Stack) Push(x int){
+	newNode := &Node{data:x}
 	newNode.next=s.top
 	s.top=newNode
 }
 
-func (s *Stack) Pop ()int{
+func (s *Stack) Pop()int{
 	if s.top == nil{
-		fmt.Println("Stack Underflow")
+		fmt.Println("Stack is empty")
 		return -1
 	}
 	val := s.top.data
@@ -26,20 +25,28 @@ func (s *Stack) Pop ()int{
 	return val
 }
 
-func (s *Stack) Peek()int{
-	if s.top ==nil{
+func (s *Stack)Traverse(){
+	if s.top == nil{
 		fmt.Println("Stack is empty")
-		return -1
 	}
-	return s.top.data
+	current := s.top
+	for current != nil{
+		fmt.Print(current.data,"->")
+		current=current.next
+	}
+	fmt.Print("End")
 }
 
-func main(){
-	s:=&Stack{}
-	s.Push(10)
-	s.Push(20)
-	s.Push(30)
-	fmt.Println(s.Pop())
-	fmt.Println(s.Peek())
-	fmt.Println(s.Pop())
-}
+ func main(){
+	list:=Stack{}
+	list.Push(10)
+	list.Push(20)
+	list.Push(30)
+
+	fmt.Println(list.top.data)
+	fmt.Println(list.top.next.data)
+	fmt.Println(list.top.next.data)
+	list.Traverse()
+
+
+ }
